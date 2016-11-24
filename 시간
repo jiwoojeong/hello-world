@@ -1,0 +1,14 @@
+  1 #include <stdio.h> 
+  2 #include <time.h> 
+  3 
+  4 int main(){  
+  5     time_t timer; 
+  6     struct tm *t;  
+  7 
+  8     timer = time(NULL); 
+  9 
+  10     t = localtime(&timer); 
+  11 
+  12     printf("%d/%d/%d %d:%d:%d", t->tm_year + 1900, t->tm_mon+1, t->tm_mday,     t->tm_hour, t->tm_min, t->tm_sec);
+  13     return 0; 
+  14 }
