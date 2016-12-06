@@ -1,0 +1,35 @@
+ void mymv(filesys *fs, directory *rootdir)
+  {
+      int i = 0, j = 0;
+      char minidata_tmp[16][8], temp[10], res[4];
+      int cnt_1 = strlen(ptr[1]);
+      int cnt_2 = strlen(ptr[2]);
+      int num = 0, a = 0 , b = 0;
+      directory *head=rootdir;
+ 
+      for(a ; a<16; a++){
+          for(b ; b < 8 ; b++){
+              minidata_tmp[a][b] = fs->datablock[head->datablocknum].minidata[a][b];
+          }
+      }657
+      printf("\n%s", minidata_tmp[0]);
+      printf("\n%s", minidata_tmp[1]);
+      printf("\n%s", minidata_tmp[2]);
+      printf("\n%s", minidata_tmp[3]);
+      printf("\n%s\n", minidata_tmp[4]);
+      for(i; i<16;i++){
+          minidata_tmp[i][cnt_1] = '\0';
+      }
+      for(j; j<16; j++){
+          if(strcmp(ptr[2], minidata_tmp[j])==0){
+              num = j;
+              break;
+          }
+      }
+      for(i = 0; i<8 ; i++){
+          temp[i] = fs->datablock[head->datablocknum].minidata[num][cnt_1];
+      }
+      strcpy(fs->datablock[head->datablocknum].minidata[num], ptr[2]);
+      strcat(fs->datablock[head->datablocknum].minidata[num],temp);
+ 
+  }
