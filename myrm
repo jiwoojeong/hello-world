@@ -1,0 +1,52 @@
+void myrm(filesys *fs, directory *rootdir){
+int i = 0, j = 0, a = 0, b=0, inodenum, cnt;
+char minidata_tmp[16][8], temp[10], inodenum_s[5];
+int cnt_1;
+int num = 0;
+char fd;
+directory *head = rootdir;    
+while(1){
+if(ptr[1][a] == '/'){
+cnt_1 = strlen(temp);
+break;
+}        
+temp[a] = ptr[1][a];
+if(ptr[1][a] == '\0'){    
+cnt_1 = strlen(temp);     
+break;     
+}  
+a++;    
+} 
+a = 0; 
+printf("%d", cnt_1); 
+for(i=0;i<16;i++){  
+for(j=0;j<8;j++){     
+minidata_tmp[i][j] = fs->datablock[head->datablocknum].minidata[i][j];    
+if(minidata_tmp[i][j]=='\0')  
+break;      
+}
+}
+for(i = 0;i<16;i++){   
+minidata_tmp[i][cnt_1] = '\0';  
+} 
+for(j=0;j<16;j++){     
+if(strcmp(temp,minidata_tmp[j])==0){    
+num=j;    
+break;  
+}
+} 
+while(1){
+inodenum_s[b] = fs->datablock[head->datablocknum].minidata[j][cnt_1+b];     
+if(fs->datablock[head->datablocknum].minidata[j][cnt_1+b] == '\0')  
+break;  
+b++; 
+}
+inodenum = atoi(inodenum_s); 
+fd=fs->inodeblock[inodenum].f_d;
+fs->datablock[head->datablocknum].minidata[j][0] = '\0';      
+for(i = j ; i <=16 ; i++){    
+for(j = 0; j<8;j++){     
+fs->datablock[head->datablocknum].minidata[i][j]=fs->datablock[head->datablocknum].minidata[i+1][j];     
+}
+
+}
